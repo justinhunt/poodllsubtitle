@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Poodll Subtitle Project</title>
+        <script data-main="js/app" src="js/lib/require.js"></script>
+        <style>
+            /* the subtitle tile/editor container  */
+            .poodllsubtitle_itemcontainer {
+                border: 1px solid black;
+                margin-top: 8px;
+            }
+
+            /* the subtitle tile/editor container when subtitle active */
+            .poodllsubtitle_itemcontainer.activesubtitle {
+                border: 1px solid red;
+            }
+
+            /* the subtitle text-tile part field */
+            .poodllsubtitle_tt_part {
+                min-height: 15px;
+                margin-left: 10px;
+            }
+
+            /* the subtitle text-tile time fields */
+            .poodllsubtitle_tt_start, .poodllsubtitle_tt_end {
+                max-width: 150px;
+            }
+
+            /* the subtitle editor text tile container */
+            .poodllsubtitle_tt {
+                display: flex;
+            }
+            /* the preview subtitle line */
+            #poodllsubtitle_previewline {
+                text-align: center;
+                color: white;
+                background-color: black;
+                width: 600px;
+                min-height: 30px;
+                margin: auto;
+            }
+            /* the preview container */
+            div#poodllsubtitle_previewbox {
+                width: max-content;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Poodll Subtitle Project</h1>
+        <div id="poodllsubtitle_loader" class="poodllsubtitle_loader">
+        <div id="poodllsubtitle_videourl">Vid URL <input type="text" size="100" name="poodllsubtitle_videoinput" id="poodllsubtitle_videoinput" class="poodllsubtitle_videoinput" value="https://s3.amazonaws.com/poodll-videoprocessing-out-us-east-1/CP/1/localhostuser/s.codepen.io/user12345/poodllfile5b7cda8f238161.mp4"/></div>
+        <div id="poodllsubtitle_vtturl">Vtt URL <input type="text" size="100" name="poodllsubtitle_vttinput" id="poodllsubtitle_vttinput" class="poodllsubtitle_vttinput" value="https://s3.amazonaws.com/poodll-videoprocessing-out-us-east-1/CP/1/localhostuser/s.codepen.io/user12345/poodllfile5b7cda8f238161.mp4.vtt"/></div>
+        </div>
+        <button type="button" id="poodllsubtitle_load" class="poodllsubtitle_load">Load</button>
+        <button type="button" id="poodllsubtitle_download" class="poodllsubtitle_download">Download</button>
+
+        <div id="poodllsubtitle_previewbox" class="poodllsubtitle_previewbox">
+        <video id="poodllsubtitle_video" class="poodllsubtitle_video" controls width="600px">
+        </video>
+        <div id="poodllsubtitle_previewline"  class="poodllsubtitle_previewline"></div>
+        </div>
+    <div id='poodllsubtitle_tiles' class='poodllsubtitle_tiles'>
+
+    </div>
+        <div id='poodllsubtitle_editor' class='poodllsubtitle_editor' style='display: none;'>
+            Start: <input type="text" name="poodllsubtitle_edstart" id="poodllsubtitle_edstart" class="poodllsubtitle_edstart"/>
+            End: <input type="text" name="poodllsubtitle_edend" id="poodllsubtitle_edend" class="poodllsubtitle_edend"/>
+            Part: <input type="text" name="poodllsubtitle_edpart" id="poodllsubtitle_edpart" class="poodllsubtitle_edpart"/>
+            <div id='poodllsubtitle_edbuttons' class='poodllsubtitle_edbuttons'>
+                <button type="button" id="poodllsubtitle_eddelete" class="poodllsubtitle_eddelete">D</button>
+                <button type="button" id="poodllsubtitle_edmergeup" class="poodllsubtitle_edmergeup">M</button>
+                <button type="button" id="poodllsubtitle_edsplit" class="poodllsubtitle_edsplit">S</button>
+                <button type="button" id="poodllsubtitle_edcancel" class="poodllsubtitle_edcancel">C</button>
+                <button type="button" id="poodllsubtitle_edapply" class="poodllsubtitle_edapply">A</button>
+            </div>
+        </div>
+        <button type="button" id="poodllsubtitle_addnew" class="poodllsubtitle_addnew">Add New</button>
+    </body>
+</html>
