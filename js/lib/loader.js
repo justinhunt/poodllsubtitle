@@ -1,4 +1,4 @@
-define(["jquery", "poodllsubtitle", "vtthelper","videohelper"], function($, poodllsubtitle, vtthelper, videohelper) {
+define(["jquery", "poodllsubtitle", "vtthelper","previewhelper"], function($, poodllsubtitle, vtthelper, previewhelper) {
 
     //Video helper is manipulating the video and passing on video events and info to other parts of app
 
@@ -9,11 +9,11 @@ define(["jquery", "poodllsubtitle", "vtthelper","videohelper"], function($, pood
           {start: 2000, end: 2990, part: 'text two'},
           {start: 3000, end: 3990, part: 'text three'}],
 
-      init: function(){
+      init: function(mediatype){
             this.initControls();
             this.initEvents();
 
-          poodllsubtitle.init(this.sampledata);
+          poodllsubtitle.init(this.sampledata,mediatype);
           this.runtests();
       },
 
@@ -26,8 +26,7 @@ define(["jquery", "poodllsubtitle", "vtthelper","videohelper"], function($, pood
       },
 
       initControls: function(){
-          this.controls.videoplayer = $('#poodllsubtitle_videoinput');
-          this.controls.videourl = $('#poodllsubtitle_videoinput');
+          this.controls.mediaurl = $('#poodllsubtitle_mediainput');
           this.controls.vtturl = $('#poodllsubtitle_vttinput');
           this.controls.loadbutton = $('#poodllsubtitle_load');
           this.controls.downloadbutton = $('#poodllsubtitle_download');
@@ -36,10 +35,10 @@ define(["jquery", "poodllsubtitle", "vtthelper","videohelper"], function($, pood
       initEvents: function(){
          var that = this;
          this.controls.loadbutton.click(function(){
-             var vidurl = that.controls.videourl.val().trim();
+             var mediaurl = that.controls.mediaurl.val().trim();
              var vtturl = that.controls.vtturl.val().trim();
-             if(vidurl && vidurl != ''){
-                 videohelper.setVideoURL(vidurl);
+             if(mediaurl && mediaurl != ''){
+                 previewhelper.setMediaURL(mediaurl);
              }
              if(vtturl && vtturl != ''){
                  $.get(vtturl, function(thevtt) {

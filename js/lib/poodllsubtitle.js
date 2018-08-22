@@ -1,4 +1,4 @@
-define(["jquery","vtthelper","subtitleset","videohelper"], function($, vtthelper, subtitleset, videohelper) {
+define(["jquery","vtthelper","subtitleset","previewhelper"], function($, vtthelper, subtitleset, previewhelper) {
 
     //pooodllsubtitle helper is about the subtitle tiles and editing
 
@@ -9,9 +9,9 @@ define(["jquery","vtthelper","subtitleset","videohelper"], function($, vtthelper
       editoropen: false,
 
       //set up the subtitle edit session
-      init: function(subtitledata){
+      init: function(subtitledata,mediatype){
           subtitleset.init(subtitledata);
-          videohelper.init(subtitleset);
+          previewhelper.init(subtitleset,mediatype);
           this.initControls();
           this.initTiles();
           this.initEvents();
@@ -30,6 +30,8 @@ define(["jquery","vtthelper","subtitleset","videohelper"], function($, vtthelper
           this.controls.buttonapply = $("#poodllsubtitle_edapply");
           this.controls.buttoncancel = $("#poodllsubtitle_edcancel");
           this.controls.buttonaddnew = $("#poodllsubtitle_addnew");
+          this.controls.buttonstartsetnow = $("#poodllsubtitle_startsetnow");
+          this.controls.buttonendsetnow = $("#poodllsubtitle_endsetnow");
       },
 
       hideEditor: function(){
@@ -75,7 +77,7 @@ define(["jquery","vtthelper","subtitleset","videohelper"], function($, vtthelper
               that.currentindex = newindex;
               that.currentitemcontainer = $(this).parent();
               that.shiftEditor(that.currentindex ,that.currentitemcontainer);
-              videohelper.setPosition(that.currentindex);
+              previewhelper.setPosition(that.currentindex);
            });
 
           //editor button delete tile click event
@@ -83,7 +85,7 @@ define(["jquery","vtthelper","subtitleset","videohelper"], function($, vtthelper
               that.restoreTile();
               subtitleset.removeItem(that.currentindex);
               that.syncFrom(that.currentindex);
-              videohelper.updateLabel();
+              previewhelper.updateLabel();
           });
 
           //editor button merge with prev tile click event
@@ -91,7 +93,7 @@ define(["jquery","vtthelper","subtitleset","videohelper"], function($, vtthelper
               that.editorToTile();
               subtitleset.mergeUp(that.currentindex);
               that.syncFrom(that.currentindex-1);
-              videohelper.setPosition(that.currentindex-1);
+              previewhelper.setPosition(that.currentindex-1);
           });
 
           //editor button split current tile click event
@@ -99,18 +101,32 @@ define(["jquery","vtthelper","subtitleset","videohelper"], function($, vtthelper
               that.editorToTile();
               subtitleset.split(that.currentindex);
               that.syncFrom(that.currentindex);
-              videohelper.updateLabel();
+              previewhelper.updateLabel();
           });
 
           //editor button apply changesclick event
           this.controls.buttonapply.click(function(){
               that.editorToTile();
-              videohelper.updateLabel();
+              previewhelper.updateLabel();
           });
 
           //editor button cancel changes click event
           this.controls.buttoncancel.click(function(){
               that.restoreTile();
+          });
+
+          //editor set current preview time to start
+          this.controls.buttonstartsetnow.click(function(){
+              var time = previewhelper.fetchCurrentTime();
+              var displaytime = vtthelper.ms2TimeString(time);
+              that.controls.edstart.val(displaytime);
+          });
+
+          //editor set current preview time to end
+          this.controls.buttonendsetnow.click(function(){
+              var time = previewhelper.fetchCurrentTime();
+              var displaytime = vtthelper.ms2TimeString(time);
+              that.controls.edend.val(displaytime);
           });
 
           //"Add new tile" button click event
@@ -127,9 +143,10 @@ define(["jquery","vtthelper","subtitleset","videohelper"], function($, vtthelper
               var newtile = that.fetchNewTextTileContainer(newdataid,newstart,newend,'');
               that.controls.container.append(newtile);
           });
+
           //set callbacks for video events we are interested in
-          videohelper.highlightItem = this.highlightContainer;
-          videohelper.deHighlightAll = this.deHighlightAll;
+          previewhelper.highlightItem = this.highlightContainer;
+          previewhelper.deHighlightAll = this.deHighlightAll;
 
       },
 

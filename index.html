@@ -48,23 +48,24 @@
     <body>
         <h1>Poodll Subtitle Project</h1>
         <div id="poodllsubtitle_loader" class="poodllsubtitle_loader">
-        <div id="poodllsubtitle_videourl">Vid URL <input type="text" size="100" name="poodllsubtitle_videoinput" id="poodllsubtitle_videoinput" class="poodllsubtitle_videoinput" value="https://s3.amazonaws.com/poodll-videoprocessing-out-us-east-1/CP/1/localhostuser/s.codepen.io/user12345/poodllfile5b7cda8f238161.mp4"/></div>
-        <div id="poodllsubtitle_vtturl">Vtt URL <input type="text" size="100" name="poodllsubtitle_vttinput" id="poodllsubtitle_vttinput" class="poodllsubtitle_vttinput" value="https://s3.amazonaws.com/poodll-videoprocessing-out-us-east-1/CP/1/localhostuser/s.codepen.io/user12345/poodllfile5b7cda8f238161.mp4.vtt"/></div>
+        <div id="poodllsubtitle_videourl">Media URL <input type="text" size="100" name="poodllsubtitle_mediainput" id="poodllsubtitle_mediainput" class="poodllsubtitle_mediainput" value="https://s3.amazonaws.com/poodll-videoprocessing-out-us-east-1/CP/1/localhostuser/s.codepen.io/user12345/poodllfile5b7cfb4f004221.mp4"/></div>
+        <div id="poodllsubtitle_vtturl">Vtt URL <input type="text" size="100" name="poodllsubtitle_vttinput" id="poodllsubtitle_vttinput" class="poodllsubtitle_vttinput" value="https://s3.amazonaws.com/poodll-videoprocessing-out-us-east-1/CP/1/localhostuser/s.codepen.io/user12345/poodllfile5b7cfb4f004221.mp4.vtt"/></div>
         </div>
         <button type="button" id="poodllsubtitle_load" class="poodllsubtitle_load">Load</button>
         <button type="button" id="poodllsubtitle_download" class="poodllsubtitle_download">Download</button>
 
         <div id="poodllsubtitle_previewbox" class="poodllsubtitle_previewbox">
-        <video id="poodllsubtitle_video" class="poodllsubtitle_video" controls width="600px">
+        <video id="poodllsubtitle_video" class="poodllsubtitle_video" controls width="600px" style="display: none">
         </video>
+        <audio id="poodllsubtitle_audio" class="poodllsubtitle_audio" controls width="600px" style="display: none">
+        </audio>
         <div id="poodllsubtitle_previewline"  class="poodllsubtitle_previewline"></div>
         </div>
     <div id='poodllsubtitle_tiles' class='poodllsubtitle_tiles'>
-
     </div>
         <div id='poodllsubtitle_editor' class='poodllsubtitle_editor' style='display: none;'>
-            Start: <input type="text" name="poodllsubtitle_edstart" id="poodllsubtitle_edstart" class="poodllsubtitle_edstart"/>
-            End: <input type="text" name="poodllsubtitle_edend" id="poodllsubtitle_edend" class="poodllsubtitle_edend"/>
+            Start: <button type="button" id="poodllsubtitle_startsetnow" class="poodllsubtitle_startsetnow">N</button><input type="text" name="poodllsubtitle_edstart" id="poodllsubtitle_edstart" class="poodllsubtitle_edstart"/>
+            End:  <button type="button" id="poodllsubtitle_endsetnow" class="poodllsubtitle_endsetnow">N</button><input type="text" name="poodllsubtitle_edend" id="poodllsubtitle_edend" class="poodllsubtitle_edend"/>
             Part: <input type="text" name="poodllsubtitle_edpart" id="poodllsubtitle_edpart" class="poodllsubtitle_edpart"/>
             <div id='poodllsubtitle_edbuttons' class='poodllsubtitle_edbuttons'>
                 <button type="button" id="poodllsubtitle_eddelete" class="poodllsubtitle_eddelete">D</button>
